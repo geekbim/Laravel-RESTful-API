@@ -3,14 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class ProductController extends Controller
 {
-    public function post()
+    public function post(Request $request)
     {
+        $product = new Product;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->quantity = $request->quantity;
+        $product->active = $request->active;
+        $product->description = $request->description;
+
+        $product->save();
+
         return response()->json(
             [
-                'message' => 'POST Method Success'
+                'message' => 'Success',
+                'data' => $product
             ]
         );
     }
